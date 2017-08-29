@@ -126,6 +126,7 @@ var Grid = exports.Grid = function (_Component) {
                 height = _props.height,
                 infinite = _props.infinite,
                 pager = _props.pager,
+                pageIndex = _props.pageIndex,
                 pageSize = _props.pageSize,
                 plugins = _props.plugins,
                 reducerKeys = _props.reducerKeys,
@@ -182,6 +183,7 @@ var Grid = exports.Grid = function (_Component) {
             var _props2 = this.props,
                 dataSource = _props2.dataSource,
                 gridType = _props2.gridType,
+                pageIndex = _props2.pageIndex,
                 pageSize = _props2.pageSize,
                 events = _props2.events,
                 plugins = _props2.plugins,
@@ -200,7 +202,7 @@ var Grid = exports.Grid = function (_Component) {
 
             this.setColumns();
 
-            this.setData({ pageSize: pageSize });
+            this.setData({ pageIndex: pageIndex, pageSize: pageSize });
 
             this.columnManager.init({
                 plugins: plugins,
@@ -505,6 +507,7 @@ Grid.propTypes = {
     infinite: bool,
     loadingState: object,
     menuState: object,
+    pageIndex: number,
     pageSize: number,
     pager: object,
     plugins: object,
