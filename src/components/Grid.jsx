@@ -25,6 +25,9 @@ import {
     setData,
     setTreeData
 } from '../actions/GridActions';
+import {
+    setPageIndexAsync
+} from '../actions/plugins/pager/PagerActions';
 import { mapStateToProps } from '../util/mapStateToProps';
 import { shouldGridUpdate } from '../util/shouldComponentUpdate';
 import { isPluginEnabled } from '../util/isPluginEnabled';
@@ -66,7 +69,6 @@ export class Grid extends Component {
             height,
             infinite,
             pager,
-            pageIndex,
             pageSize,
             plugins,
             reducerKeys,
@@ -133,12 +135,14 @@ export class Grid extends Component {
 
         const {
             dataSource,
+            filterFields,
             gridType,
             pageIndex,
             pageSize,
             events,
             plugins,
             reducerKeys,
+            sortParams,
             stateKey
         } = this.props;
 
@@ -155,7 +159,7 @@ export class Grid extends Component {
 
         this.setColumns();
 
-        this.setData({ pageIndex, pageSize });
+        this.setData({ pageIndex, pageSize }, filterFields, sortParams);
 
         this.columnManager.init({
             plugins,
@@ -246,6 +250,7 @@ export class Grid extends Component {
         reducerKeys: oneOfType([object, string]),
         selectedRows: object,
         showTreeRootNode: bool,
+        sortParams: object,
         stateKey: string,
         stateful: bool,
         store: object
@@ -258,9 +263,11 @@ export class Grid extends Component {
         events: {},
         filterFields: {},
         height: '500px',
+        pageIndex: null,
         pageSize: 25,
         reducerKeys: {},
-        showTreeRootNode: false
+        showTreeRootNode: false,
+        sortParams: null
     };
 
     static CSS_LOADED = false;
@@ -274,7 +281,7 @@ export class Grid extends Component {
         _key: undefined
     })
 
-    setData(extraParams = {}) {
+    setData(extraParams = {}, filterFields, sortParams) {
 
         const {
             dataSource,
@@ -332,7 +339,14 @@ export class Grid extends Component {
                     || typeof dataSource === 'function') {
                 this.setGridDataType(false);
                 store.dispatch(
-                    getAsyncData({
+                    filterFields || sortParams ? setPageIndexAsync({
+                        stateKey,
+                        dataSource,
+                        pageIndex: extraParams.pageIndex,
+                        pageSize: extraParams.pageSize,
+                        sort: sortParams,
+                        filterFields: filterFields
+                    }) : getAsyncData({
                         stateKey,
                         dataSource,
                         extraParams: { ...extraParams, editMode }
