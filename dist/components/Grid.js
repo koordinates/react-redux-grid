@@ -67,6 +67,8 @@ var _GridConstants = require('../constants/GridConstants');
 
 var _GridActions = require('../actions/GridActions');
 
+var _PagerActions = require('../actions/plugins/pager/PagerActions');
+
 var _mapStateToProps = require('../util/mapStateToProps');
 
 var _shouldComponentUpdate = require('../util/shouldComponentUpdate');
@@ -126,7 +128,6 @@ var Grid = exports.Grid = function (_Component) {
                 height = _props.height,
                 infinite = _props.infinite,
                 pager = _props.pager,
-                pageIndex = _props.pageIndex,
                 pageSize = _props.pageSize,
                 plugins = _props.plugins,
                 reducerKeys = _props.reducerKeys,
@@ -182,12 +183,14 @@ var Grid = exports.Grid = function (_Component) {
         value: function componentWillMount() {
             var _props2 = this.props,
                 dataSource = _props2.dataSource,
+                filterFields = _props2.filterFields,
                 gridType = _props2.gridType,
                 pageIndex = _props2.pageIndex,
                 pageSize = _props2.pageSize,
                 events = _props2.events,
                 plugins = _props2.plugins,
                 reducerKeys = _props2.reducerKeys,
+                sortParams = _props2.sortParams,
                 stateKey = _props2.stateKey;
 
 
@@ -202,7 +205,7 @@ var Grid = exports.Grid = function (_Component) {
 
             this.setColumns();
 
-            this.setData({ pageIndex: pageIndex, pageSize: pageSize });
+            this.setData({ pageIndex: pageIndex, pageSize: pageSize }, filterFields, sortParams);
 
             this.columnManager.init({
                 plugins: plugins,
@@ -312,6 +315,8 @@ var Grid = exports.Grid = function (_Component) {
         key: 'setData',
         value: function setData() {
             var extraParams = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+            var filterFields = arguments[1];
+            var sortParams = arguments[2];
             var _props3 = this.props,
                 dataSource = _props3.dataSource,
                 data = _props3.data,
@@ -353,7 +358,14 @@ var Grid = exports.Grid = function (_Component) {
             } else if (this.gridType === 'grid') {
                 if (typeof dataSource === 'string' || typeof dataSource === 'function') {
                     this.setGridDataType(false);
-                    store.dispatch((0, _GridActions.getAsyncData)({
+                    store.dispatch(filterFields || sortParams ? (0, _PagerActions.setPageIndexAsync)({
+                        stateKey: stateKey,
+                        dataSource: dataSource,
+                        pageIndex: extraParams.pageIndex,
+                        pageSize: extraParams.pageSize,
+                        sort: sortParams,
+                        filterFields: filterFields
+                    }) : (0, _GridActions.getAsyncData)({
                         stateKey: stateKey,
                         dataSource: dataSource,
                         extraParams: _extends({}, extraParams, { editMode: editMode })
@@ -514,6 +526,7 @@ Grid.propTypes = {
     reducerKeys: oneOfType([object, string]),
     selectedRows: object,
     showTreeRootNode: bool,
+    sortParams: object,
     stateKey: string,
     stateful: bool,
     store: object
@@ -525,9 +538,11 @@ Grid.defaultProps = {
     events: {},
     filterFields: {},
     height: '500px',
+    pageIndex: null,
     pageSize: 25,
     reducerKeys: {},
-    showTreeRootNode: false
+    showTreeRootNode: false,
+    sortParams: null
 };
 Grid.CSS_LOADED = false;
 
