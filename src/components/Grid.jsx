@@ -66,6 +66,7 @@ export class Grid extends Component {
             height,
             infinite,
             pager,
+            pageIndex,
             pageSize,
             plugins,
             reducerKeys,
@@ -133,6 +134,7 @@ export class Grid extends Component {
         const {
             dataSource,
             gridType,
+            pageIndex,
             pageSize,
             events,
             plugins,
@@ -153,7 +155,7 @@ export class Grid extends Component {
 
         this.setColumns();
 
-        this.setData({ pageSize });
+        this.setData({ pageIndex, pageSize });
 
         this.columnManager.init({
             plugins,
@@ -237,6 +239,7 @@ export class Grid extends Component {
         infinite: bool,
         loadingState: object,
         menuState: object,
+        pageIndex: number,
         pageSize: number,
         pager: object,
         plugins: object,
