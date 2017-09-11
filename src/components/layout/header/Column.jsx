@@ -357,10 +357,10 @@ export const getWidth = (col, key, columns, defaultColumnWidth) => {
 
     let width = col.width || defaultColumnWidth;
 
-    if (isLastColumn
-            && totalWidth !== 0
-            && totalWidth < 100) {
-        width = `${100 - (totalWidth - parseFloat(width))}%`;
+    if (totalWidth !== 0
+        && totalWidth < 100) {
+        const scaleWidthBy = 100 / totalWidth;
+        width = `${scaleWidthBy * parseFloat(width)}%`;
     }
 
     return width;
