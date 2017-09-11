@@ -345,9 +345,6 @@ export const isSortable = (col, columnManager) => {
 
 export const getWidth = (col, key, columns, defaultColumnWidth) => {
 
-    const visibleColumns = columns.filter((_col) => !_col.hidden);
-    const lastColumn = visibleColumns[visibleColumns.length - 1];
-    const isLastColumn = lastColumn && lastColumn.name === col.name;
     const totalWidth = columns.reduce((a, _col) => {
         if (_col.hidden) {
             return a + 0;
