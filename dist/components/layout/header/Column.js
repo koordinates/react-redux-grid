@@ -279,11 +279,6 @@ var isSortable = exports.isSortable = function isSortable(col, columnManager) {
 
 var getWidth = exports.getWidth = function getWidth(col, key, columns, defaultColumnWidth) {
 
-    var visibleColumns = columns.filter(function (_col) {
-        return !_col.hidden;
-    });
-    var lastColumn = visibleColumns[visibleColumns.length - 1];
-    var isLastColumn = lastColumn && lastColumn.name === col.name;
     var totalWidth = columns.reduce(function (a, _col) {
         if (_col.hidden) {
             return a + 0;
@@ -293,8 +288,9 @@ var getWidth = exports.getWidth = function getWidth(col, key, columns, defaultCo
 
     var width = col.width || defaultColumnWidth;
 
-    if (isLastColumn && totalWidth !== 0 && totalWidth < 100) {
-        width = 100 - (totalWidth - parseFloat(width)) + '%';
+    if (totalWidth !== 0 && totalWidth < 100) {
+        var scaleWidthBy = 100 / totalWidth;
+        width = scaleWidthBy * parseFloat(width) + '%';
     }
 
     return width;
