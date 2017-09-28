@@ -172,6 +172,7 @@ class FixedHeader extends Component {
         const tableHeight = headerDOM.parentNode.clientHeight;
 
         this.HEADER_HEIGHT = headerDOM.clientHeight;
+        this._isMounted = true;
 
         if (isSticky && !this._scrollListener) {
             this.createScrollListener(
@@ -181,7 +182,6 @@ class FixedHeader extends Component {
     }
 
     componentDidUpdate() {
-
         if (!this.updateFunc) {
             this.updateFunc = debounce(this.getScrollWidth, 200);
         }
@@ -190,6 +190,8 @@ class FixedHeader extends Component {
     }
 
     componentWillUnmount() {
+        this._isMounted = false;
+
         if (this.scrollTarget) {
             this.scrollTarget.removeEventListener(
                 'scroll', this._scrollListener
@@ -314,8 +316,18 @@ class FixedHeader extends Component {
 
     getScrollWidth() {
         const { CLASS_NAMES } = gridConfig();
+
+        if (!this._isMounted) {
+            // component might have been unmounted
+            return;
+        }
+
         const header = ReactDOM.findDOMNode(this);
         const { headerOffset } = this.state;
+
+        if (!header) {
+            return;
+        }
 
         const fixed = header
             .querySelector(`.${prefix(CLASS_NAMES.HEADER_FIXED)}`);
