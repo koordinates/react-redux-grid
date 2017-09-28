@@ -204,6 +204,7 @@ var FixedHeader = function (_Component) {
             var tableHeight = headerDOM.parentNode.clientHeight;
 
             this.HEADER_HEIGHT = headerDOM.clientHeight;
+            this._isMounted = true;
 
             if (isSticky && !this._scrollListener) {
                 this.createScrollListener(plugins.STICKY_HEADER, headerDOM, tableHeight);
@@ -212,7 +213,6 @@ var FixedHeader = function (_Component) {
     }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate() {
-
             if (!this.updateFunc) {
                 this.updateFunc = (0, _throttle.debounce)(this.getScrollWidth, 200);
             }
@@ -222,6 +222,8 @@ var FixedHeader = function (_Component) {
     }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
+            this._isMounted = false;
+
             if (this.scrollTarget) {
                 this.scrollTarget.removeEventListener('scroll', this._scrollListener);
             }
@@ -339,9 +341,18 @@ var FixedHeader = function (_Component) {
             var _gridConfig2 = (0, _GridConstants.gridConfig)(),
                 CLASS_NAMES = _gridConfig2.CLASS_NAMES;
 
+            if (!this._isMounted) {
+                // component might have been unmounted
+                return;
+            }
+
             var header = _reactDom2.default.findDOMNode(this);
             var headerOffset = this.state.headerOffset;
 
+
+            if (!header) {
+                return;
+            }
 
             var fixed = header.querySelector('.' + (0, _prefix.prefix)(CLASS_NAMES.HEADER_FIXED));
             var hidden = header.parentNode.querySelector('.' + (0, _prefix.prefix)(CLASS_NAMES.HEADER_HIDDEN));
