@@ -31,7 +31,7 @@ var _GridActions = require('./../../../actions/GridActions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+var isChrome = navigator && /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 
 var Column = exports.Column = function Column(_ref) {
     var actualIndex = _ref.actualIndex,

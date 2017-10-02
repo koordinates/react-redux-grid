@@ -52,7 +52,8 @@ var get = exports.get = function get(state, key, entry) {
         return null;
     }
 
-    return stateItem.get(entry);
+    var isStateImmutable = typeof stateItem.get === 'function';
+    return isStateImmutable ? stateItem.get(entry) : stateItem[entry];
 };
 ;
 
