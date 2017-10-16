@@ -133,11 +133,27 @@ var TableContainer = exports.TableContainer = function (_Component) {
         var _this = _possibleConstructorReturn(this, (TableContainer.__proto__ || Object.getPrototypeOf(TableContainer)).call(this, props));
 
         _this.handleResize = function () {
-            return _this.__handleResize__REACT_HOT_LOADER__.apply(_this, arguments);
+            var infinite = _this.props.infinite;
+            var containerHeight = _this.state.containerHeight;
+
+
+            if (infinite) {
+                var container = _reactDom2.default.findDOMNode(_this);
+
+                if (containerHeight !== container.clientHeight) {
+                    _this.setState({
+                        containerHeight: container.clientHeight
+                    });
+                }
+            }
         };
 
         _this.handleScroll = function () {
-            return _this.__handleScroll__REACT_HOT_LOADER__.apply(_this, arguments);
+            var container = _reactDom2.default.findDOMNode(_this);
+
+            _this.setState({
+                containerScrollTop: container.scrollTop
+            });
         };
 
         _this.state = {
@@ -145,34 +161,6 @@ var TableContainer = exports.TableContainer = function (_Component) {
         };
         return _this;
     }
-
-    _createClass(TableContainer, [{
-        key: '__handleResize__REACT_HOT_LOADER__',
-        value: function __handleResize__REACT_HOT_LOADER__() {
-            var infinite = this.props.infinite;
-            var containerHeight = this.state.containerHeight;
-
-
-            if (infinite) {
-                var container = _reactDom2.default.findDOMNode(this);
-
-                if (containerHeight !== container.clientHeight) {
-                    this.setState({
-                        containerHeight: container.clientHeight
-                    });
-                }
-            }
-        }
-    }, {
-        key: '__handleScroll__REACT_HOT_LOADER__',
-        value: function __handleScroll__REACT_HOT_LOADER__() {
-            var container = _reactDom2.default.findDOMNode(this);
-
-            this.setState({
-                containerScrollTop: container.scrollTop
-            });
-        }
-    }]);
 
     return TableContainer;
 }(_react.Component);

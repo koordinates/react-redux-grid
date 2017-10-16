@@ -125,54 +125,16 @@ var TableRow = exports.TableRow = function (_Component) {
         var _this = _possibleConstructorReturn(this, (TableRow.__proto__ || Object.getPrototypeOf(TableRow)).call(this, props));
 
         _this.calculateHeights = function () {
-            return _this.__calculateHeights__REACT_HOT_LOADER__.apply(_this, arguments);
-        };
-
-        _this.findRow = function () {
-            return _this.__findRow__REACT_HOT_LOADER__.apply(_this, arguments);
-        };
-
-        _this.moveRow = function () {
-            return _this.__moveRow__REACT_HOT_LOADER__.apply(_this, arguments);
-        };
-
-        _this.rowSelection = function () {
-            return _this.__rowSelection__REACT_HOT_LOADER__.apply(_this, arguments);
-        };
-
-        _this.toRowComponents = function () {
-            return _this.__toRowComponents__REACT_HOT_LOADER__.apply(_this, arguments);
-        };
-
-        _this.infiniteSpacer = function () {
-            return _this.__infiniteSpacer__REACT_HOT_LOADER__.apply(_this, arguments);
-        };
-
-        _this.emptyData = function () {
-            return _this.__emptyData__REACT_HOT_LOADER__.apply(_this, arguments);
-        };
-
-        _this.state = {
-            viewableIndex: 0,
-            rowHeight: _GridConstants.ROW_HEIGHT,
-            viewableCount: _GridConstants.DEFAULT_VIEWABLE_RECORDS
-        };
-        return _this;
-    }
-
-    _createClass(TableRow, [{
-        key: '__calculateHeights__REACT_HOT_LOADER__',
-        value: function __calculateHeights__REACT_HOT_LOADER__() {
             var _gridConfig = (0, _GridConstants.gridConfig)(),
                 CLASS_NAMES = _gridConfig.CLASS_NAMES;
 
-            var containerHeight = this.props.containerHeight;
-            var _state = this.state,
-                rowHeight = _state.rowHeight,
-                viewableCount = _state.viewableCount;
+            var containerHeight = _this.props.containerHeight;
+            var _this$state = _this.state,
+                rowHeight = _this$state.rowHeight,
+                viewableCount = _this$state.viewableCount;
 
 
-            var tbody = _reactDom2.default.findDOMNode(this);
+            var tbody = _reactDom2.default.findDOMNode(_this);
 
             var rows = tbody ? (0, _arrayFrom2.default)(tbody.querySelectorAll('.' + (0, _prefix.prefix)(CLASS_NAMES.ROW))) : null;
 
@@ -197,26 +159,22 @@ var TableRow = exports.TableRow = function (_Component) {
             }
 
             if (Object.keys(nextState).length) {
-                this.setState(nextState);
+                _this.setState(nextState);
             }
-        }
-    }, {
-        key: '__findRow__REACT_HOT_LOADER__',
-        value: function __findRow__REACT_HOT_LOADER__(predicate) {
-            return this._rows.find(predicate);
-        }
-    }, {
-        key: '__moveRow__REACT_HOT_LOADER__',
-        value: function __moveRow__REACT_HOT_LOADER__(current, next) {
-            var _this2 = this;
+        };
 
-            var _props = this.props,
-                stateKey = _props.stateKey,
-                store = _props.store,
-                showTreeRootNode = _props.showTreeRootNode;
+        _this.findRow = function (predicate) {
+            return _this._rows.find(predicate);
+        };
 
-            if (!this.requestedFrame) {
-                this.requestedFrame = requestAnimationFrame(function () {
+        _this.moveRow = function (current, next) {
+            var _this$props = _this.props,
+                stateKey = _this$props.stateKey,
+                store = _this$props.store,
+                showTreeRootNode = _this$props.showTreeRootNode;
+
+            if (!_this.requestedFrame) {
+                _this.requestedFrame = requestAnimationFrame(function () {
                     store.dispatch((0, _GridActions.moveNode)({
                         stateKey: stateKey,
                         store: store,
@@ -224,22 +182,21 @@ var TableRow = exports.TableRow = function (_Component) {
                         next: next,
                         showTreeRootNode: showTreeRootNode
                     }));
-                    _this2.requestedFrame = null;
+                    _this.requestedFrame = null;
                 });
             }
-        }
-    }, {
-        key: '__rowSelection__REACT_HOT_LOADER__',
-        value: function __rowSelection__REACT_HOT_LOADER__() {
-            var _props2 = this.props,
-                dataSource = _props2.dataSource,
-                infinite = _props2.infinite,
-                pager = _props2.pager,
-                pageSize = _props2.pageSize,
-                plugins = _props2.plugins;
-            var _state2 = this.state,
-                viewableIndex = _state2.viewableIndex,
-                viewableCount = _state2.viewableCount;
+        };
+
+        _this.rowSelection = function () {
+            var _this$props2 = _this.props,
+                dataSource = _this$props2.dataSource,
+                infinite = _this$props2.infinite,
+                pager = _this$props2.pager,
+                pageSize = _this$props2.pageSize,
+                plugins = _this$props2.plugins;
+            var _this$state2 = _this.state,
+                viewableIndex = _this$state2.viewableIndex,
+                viewableCount = _this$state2.viewableCount;
 
 
             if (!dataSource) {
@@ -251,51 +208,47 @@ var TableRow = exports.TableRow = function (_Component) {
             }
 
             return (0, _getCurrentRecords.getCurrentRecords)(dataSource, pager && pager.pageIndex ? pager.pageIndex : 0, pageSize, infinite, viewableIndex, viewableCount, _GridConstants.BUFFER_MULTIPLIER).data;
-        }
-    }, {
-        key: '__toRowComponents__REACT_HOT_LOADER__',
-        value: function __toRowComponents__REACT_HOT_LOADER__() {
-            var _this3 = this;
+        };
 
+        _this.toRowComponents = function () {
             return function (row, index, rows) {
                 return _react2.default.createElement(_Row2.default, {
-                    columnManager: _this3.props.columnManager,
-                    columns: _this3.props.columns,
-                    dragAndDrop: _this3.props.dragAndDrop,
-                    editor: _this3.props.editor,
-                    editorState: _this3.props.editorState,
-                    emptyDataMessage: _this3.props.emptyDataMessage,
-                    events: _this3.props.events,
-                    findRow: _this3.findRow,
-                    gridType: _this3.props.gridType,
+                    columnManager: _this.props.columnManager,
+                    columns: _this.props.columns,
+                    dragAndDrop: _this.props.dragAndDrop,
+                    editor: _this.props.editor,
+                    editorState: _this.props.editorState,
+                    emptyDataMessage: _this.props.emptyDataMessage,
+                    events: _this.props.events,
+                    findRow: _this.findRow,
+                    gridType: _this.props.gridType,
                     index: index,
-                    key: (0, _getData.getRowKey)(_this3.props.columns, row),
-                    menuState: _this3.props.menuState,
-                    moveRow: _this3.moveRow,
+                    key: (0, _getData.getRowKey)(_this.props.columns, row),
+                    menuState: _this.props.menuState,
+                    moveRow: _this.moveRow,
                     nextRow: rows.get(index + 1),
-                    plugins: _this3.props.plugins,
+                    plugins: _this.props.plugins,
                     previousRow: rows.get(index - 1),
-                    readFunc: _this3.props.readFunc,
-                    reducerKeys: _this3.props.reducerKeys,
+                    readFunc: _this.props.readFunc,
+                    reducerKeys: _this.props.reducerKeys,
                     row: row,
-                    selectedRows: _this3.props.selectedRows,
-                    selectionModel: _this3.props.selectionModel,
-                    showTreeRootNode: _this3.props.showTreeRootNode,
-                    stateKey: _this3.props.stateKey,
-                    stateful: _this3.props.stateful,
-                    store: _this3.props.store,
+                    selectedRows: _this.props.selectedRows,
+                    selectionModel: _this.props.selectionModel,
+                    showTreeRootNode: _this.props.showTreeRootNode,
+                    stateKey: _this.props.stateKey,
+                    stateful: _this.props.stateful,
+                    store: _this.props.store,
                     treeData: getTreeData(row)
                 });
             };
-        }
-    }, {
-        key: '__infiniteSpacer__REACT_HOT_LOADER__',
-        value: function __infiniteSpacer__REACT_HOT_LOADER__(method, totalCount) {
-            var infinite = this.props.infinite;
-            var _state3 = this.state,
-                rowHeight = _state3.rowHeight,
-                viewableCount = _state3.viewableCount,
-                viewableIndex = _state3.viewableIndex;
+        };
+
+        _this.infiniteSpacer = function (method, totalCount) {
+            var infinite = _this.props.infinite;
+            var _this$state3 = _this.state,
+                rowHeight = _this$state3.rowHeight,
+                viewableCount = _this$state3.viewableCount,
+                viewableIndex = _this$state3.viewableIndex;
 
 
             if (infinite && totalCount) {
@@ -309,15 +262,21 @@ var TableRow = exports.TableRow = function (_Component) {
                     style: style
                 });
             }
-        }
-    }, {
-        key: '__emptyData__REACT_HOT_LOADER__',
-        value: function __emptyData__REACT_HOT_LOADER__(totalCount) {
+        };
+
+        _this.emptyData = function (totalCount) {
             return totalCount ? undefined : _react2.default.createElement(_PlaceHolder.PlaceHolder, {
-                emptyDataMessage: this.props.emptyDataMessage
+                emptyDataMessage: _this.props.emptyDataMessage
             });
-        }
-    }]);
+        };
+
+        _this.state = {
+            viewableIndex: 0,
+            rowHeight: _GridConstants.ROW_HEIGHT,
+            viewableCount: _GridConstants.DEFAULT_VIEWABLE_RECORDS
+        };
+        return _this;
+    }
 
     return TableRow;
 }(_react.Component);

@@ -47,19 +47,12 @@ var _default = function _default(DecoratedComponent) {
             var _this = _possibleConstructorReturn(this, (RowContainer.__proto__ || Object.getPrototypeOf(RowContainer)).call(this, props));
 
             _this.getTreeData = function () {
-                return _this.__getTreeData__REACT_HOT_LOADER__.apply(_this, arguments);
+                return _this.props.treeData;
             };
 
             _this.shouldComponentUpdate = _shouldComponentUpdate.shouldRowUpdate.bind(_this);
             return _this;
         }
-
-        _createClass(RowContainer, [{
-            key: '__getTreeData__REACT_HOT_LOADER__',
-            value: function __getTreeData__REACT_HOT_LOADER__() {
-                return this.props.treeData;
-            }
-        }]);
 
         return RowContainer;
     }(_react.Component), _class.propTypes = {

@@ -45,18 +45,62 @@ var Button = exports.Button = function (_Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Button.__proto__ || Object.getPrototypeOf(Button)).call.apply(_ref, [this].concat(args))), _this), _this.listenForEnter = function () {
-            var _this2;
-
-            return (_this2 = _this).__listenForEnter__REACT_HOT_LOADER__.apply(_this2, arguments);
-        }, _this.listenForCancel = function () {
-            var _this3;
-
-            return (_this3 = _this).__listenForCancel__REACT_HOT_LOADER__.apply(_this3, arguments);
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Button.__proto__ || Object.getPrototypeOf(Button)).call.apply(_ref, [this].concat(args))), _this), _this.listenForEnter = function (e) {
+            if (e.keyCode === _GridConstants.KEYBOARD_MAP.ENTER) {
+                _this.handleButtonClick();
+            }
+        }, _this.listenForCancel = function (e) {
+            if (e.keyCode === _GridConstants.KEYBOARD_MAP.ESCAPE) {
+                _this.handleButtonClick();
+            }
         }, _this.handleButtonClick = function () {
-            var _this4;
+            var _this$props = _this.props,
+                BUTTON_TYPES = _this$props.BUTTON_TYPES,
+                editorState = _this$props.editorState,
+                events = _this$props.events,
+                type = _this$props.type,
+                stateKey = _this$props.stateKey,
+                editedRowKey = _this$props.editedRowKey,
+                store = _this$props.store;
 
-            return (_this4 = _this).__handleButtonClick__REACT_HOT_LOADER__.apply(_this4, arguments);
+
+            var values = editorState.get(editedRowKey).values;
+
+            if (!values._key) {
+                values = values.set('_key', editedRowKey);
+            }
+
+            if (type === BUTTON_TYPES.SAVE) {
+
+                var result = (0, _fire.fireEvent)('HANDLE_BEFORE_INLINE_EDITOR_SAVE', events, {
+                    values: values,
+                    editor: editorState
+                }, null);
+
+                // early exit if custom event returns false
+                // dont do save or dismiss editor
+                if (result === false) {
+                    return;
+                }
+            }
+
+            if (type === BUTTON_TYPES.CANCEL) {
+                store.dispatch((0, _EditorActions.dismissEditor)({ stateKey: stateKey }));
+            } else if (type === BUTTON_TYPES.SAVE) {
+
+                store.dispatch((0, _EditorActions.saveRow)({
+                    values: values,
+                    rowIndex: editorState.get(editedRowKey).rowIndex,
+                    stateKey: stateKey
+                }));
+
+                (0, _fire.fireEvent)('HANDLE_AFTER_INLINE_EDITOR_SAVE', events, {
+                    values: values,
+                    editor: editorState
+                }, null);
+
+                store.dispatch((0, _EditorActions.dismissEditor)({ stateKey: stateKey }));
+            }
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -110,71 +154,6 @@ var Button = exports.Button = function (_Component) {
         value: function componentWillUnmount() {
             document.removeEventListener('keydown', this._EVENT_LISTENER);
             delete this._EVENT_LISTENER;
-        }
-    }, {
-        key: '__listenForEnter__REACT_HOT_LOADER__',
-        value: function __listenForEnter__REACT_HOT_LOADER__(e) {
-            if (e.keyCode === _GridConstants.KEYBOARD_MAP.ENTER) {
-                this.handleButtonClick();
-            }
-        }
-    }, {
-        key: '__listenForCancel__REACT_HOT_LOADER__',
-        value: function __listenForCancel__REACT_HOT_LOADER__(e) {
-            if (e.keyCode === _GridConstants.KEYBOARD_MAP.ESCAPE) {
-                this.handleButtonClick();
-            }
-        }
-    }, {
-        key: '__handleButtonClick__REACT_HOT_LOADER__',
-        value: function __handleButtonClick__REACT_HOT_LOADER__() {
-            var _props3 = this.props,
-                BUTTON_TYPES = _props3.BUTTON_TYPES,
-                editorState = _props3.editorState,
-                events = _props3.events,
-                type = _props3.type,
-                stateKey = _props3.stateKey,
-                editedRowKey = _props3.editedRowKey,
-                store = _props3.store;
-
-
-            var values = editorState.get(editedRowKey).values;
-
-            if (!values._key) {
-                values = values.set('_key', editedRowKey);
-            }
-
-            if (type === BUTTON_TYPES.SAVE) {
-
-                var result = (0, _fire.fireEvent)('HANDLE_BEFORE_INLINE_EDITOR_SAVE', events, {
-                    values: values,
-                    editor: editorState
-                }, null);
-
-                // early exit if custom event returns false
-                // dont do save or dismiss editor
-                if (result === false) {
-                    return;
-                }
-            }
-
-            if (type === BUTTON_TYPES.CANCEL) {
-                store.dispatch((0, _EditorActions.dismissEditor)({ stateKey: stateKey }));
-            } else if (type === BUTTON_TYPES.SAVE) {
-
-                store.dispatch((0, _EditorActions.saveRow)({
-                    values: values,
-                    rowIndex: editorState.get(editedRowKey).rowIndex,
-                    stateKey: stateKey
-                }));
-
-                (0, _fire.fireEvent)('HANDLE_AFTER_INLINE_EDITOR_SAVE', events, {
-                    values: values,
-                    editor: editorState
-                }, null);
-
-                store.dispatch((0, _EditorActions.dismissEditor)({ stateKey: stateKey }));
-            }
         }
     }]);
 

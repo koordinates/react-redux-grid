@@ -253,40 +253,100 @@ var Grid = exports.Grid = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Grid.__proto__ || Object.getPrototypeOf(Grid)).call(this, props));
 
-        _this.setGridDataType = function () {
-            return _this.__setGridDataType__REACT_HOT_LOADER__.apply(_this, arguments);
+        _this.setGridDataType = function (asArray) {
+            _this._USING_DATA_ARRAY = asArray;
         };
 
-        _this.removeKeys = function () {
-            return _this.__removeKeys__REACT_HOT_LOADER__.apply(_this, arguments);
+        _this.removeKeys = function (item) {
+            return _extends({}, item, {
+                _key: undefined
+            });
         };
 
-        _this.getHeaderProps = function () {
-            return _this.__getHeaderProps__REACT_HOT_LOADER__.apply(_this, arguments);
+        _this.getHeaderProps = function (visible) {
+            return {
+                columnManager: _this.columnManager,
+                columns: _this.getColumns(),
+                plugins: _this.props.plugins,
+                reducerKeys: _this.props.reducerKeys,
+                dataSource: _this.props.gridData,
+                filterFields: _this.props.filterFields,
+                pager: _this.props.pager,
+                pageSize: _this.props.pageSize,
+                selectionModel: _this.selectionModel,
+                stateKey: _this.props.stateKey,
+                store: _this.getStore(),
+                stateful: _this.props.stateful,
+                visible: visible,
+                menuState: _this.props.menuState,
+                gridType: _this.gridType
+            };
         };
 
         _this.getRowProps = function () {
-            return _this.__getRowProps__REACT_HOT_LOADER__.apply(_this, arguments);
+            return {
+                columnManager: _this.columnManager,
+                columns: _this.getColumns(),
+                dragAndDrop: _this.props.dragAndDrop,
+                editor: _this.editor,
+                emptyDataMessage: _this.props.emptyDataMessage,
+                dataSource: _this.props.gridData,
+                readFunc: _this.setData.bind(_this),
+                pager: _this.props.pager,
+                editorState: _this.props.editorState,
+                selectedRows: _this.props.selectedRows,
+                events: _this.props.events,
+                pageSize: _this.props.pageSize,
+                plugins: _this.props.plugins,
+                reducerKeys: _this.props.reducerKeys,
+                selectionModel: _this.selectionModel,
+                stateKey: _this.props.stateKey,
+                store: _this.getStore(),
+                stateful: _this.props.stateful,
+                showTreeRootNode: _this.props.showTreeRootNode,
+                menuState: _this.props.menuState,
+                gridType: _this.gridType
+            };
         };
 
         _this.getEditor = function () {
-            return _this.__getEditor__REACT_HOT_LOADER__.apply(_this, arguments);
+            return _this.editor.getComponent(_this.props.plugins, _this.props.reducerKeys, _this.getStore(), _this.props.events, _this.selectionModel, _this.editor, _this.props.columns);
         };
 
         _this.getColumns = function () {
-            return _this.__getColumns__REACT_HOT_LOADER__.apply(_this, arguments);
+            var _this$props = _this.props,
+                columns = _this$props.columns,
+                columnState = _this$props.columnState;
+
+
+            if (columnState && columnState.get && columnState.get('columns')) {
+                return columnState.get('columns');
+            }
+
+            return columns;
         };
 
         _this.isLoading = function () {
-            return _this.__isLoading__REACT_HOT_LOADER__.apply(_this, arguments);
+            return _this.props.loadingState && _this.props.loadingState.isLoading ? _this.props.loadingState.isLoading : false;
         };
 
         _this.addStyles = function () {
-            return _this.__addStyles__REACT_HOT_LOADER__.apply(_this, arguments);
+            var styleEl = document.createElement('style');
+            var head = document.head || document.getElementsByTagName('head')[0];
+
+            styleEl.type = 'text/css';
+
+            if (styleEl.styleSheet) {
+                styleEl.styleSheet.cssText = styles;
+            } else {
+                styleEl.appendChild(document.createTextNode(styles));
+            }
+
+            head.appendChild(styleEl);
         };
 
         _this.getStore = function () {
-            return _this.__getStore__REACT_HOT_LOADER__.apply(_this, arguments);
+            return _this.context.store || _this.props.store;
         };
 
         _this.shouldComponentUpdate = _shouldComponentUpdate.shouldGridUpdate.bind(_this);
@@ -300,18 +360,6 @@ var Grid = exports.Grid = function (_Component) {
     }
 
     _createClass(Grid, [{
-        key: '__setGridDataType__REACT_HOT_LOADER__',
-        value: function __setGridDataType__REACT_HOT_LOADER__(asArray) {
-            this._USING_DATA_ARRAY = asArray;
-        }
-    }, {
-        key: '__removeKeys__REACT_HOT_LOADER__',
-        value: function __removeKeys__REACT_HOT_LOADER__(item) {
-            return _extends({}, item, {
-                _key: undefined
-            });
-        }
-    }, {
         key: 'setData',
         value: function setData() {
             var extraParams = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -399,99 +447,6 @@ var Grid = exports.Grid = function (_Component) {
             } else {
                 store.dispatch((0, _GridActions.setColumns)({ columns: savedColumns, stateKey: stateKey, stateful: stateful }));
             }
-        }
-    }, {
-        key: '__getHeaderProps__REACT_HOT_LOADER__',
-        value: function __getHeaderProps__REACT_HOT_LOADER__(visible) {
-            return {
-                columnManager: this.columnManager,
-                columns: this.getColumns(),
-                plugins: this.props.plugins,
-                reducerKeys: this.props.reducerKeys,
-                dataSource: this.props.gridData,
-                filterFields: this.props.filterFields,
-                pager: this.props.pager,
-                pageSize: this.props.pageSize,
-                selectionModel: this.selectionModel,
-                stateKey: this.props.stateKey,
-                store: this.getStore(),
-                stateful: this.props.stateful,
-                visible: visible,
-                menuState: this.props.menuState,
-                gridType: this.gridType
-            };
-        }
-    }, {
-        key: '__getRowProps__REACT_HOT_LOADER__',
-        value: function __getRowProps__REACT_HOT_LOADER__() {
-            return {
-                columnManager: this.columnManager,
-                columns: this.getColumns(),
-                dragAndDrop: this.props.dragAndDrop,
-                editor: this.editor,
-                emptyDataMessage: this.props.emptyDataMessage,
-                dataSource: this.props.gridData,
-                readFunc: this.setData.bind(this),
-                pager: this.props.pager,
-                editorState: this.props.editorState,
-                selectedRows: this.props.selectedRows,
-                events: this.props.events,
-                pageSize: this.props.pageSize,
-                plugins: this.props.plugins,
-                reducerKeys: this.props.reducerKeys,
-                selectionModel: this.selectionModel,
-                stateKey: this.props.stateKey,
-                store: this.getStore(),
-                stateful: this.props.stateful,
-                showTreeRootNode: this.props.showTreeRootNode,
-                menuState: this.props.menuState,
-                gridType: this.gridType
-            };
-        }
-    }, {
-        key: '__getEditor__REACT_HOT_LOADER__',
-        value: function __getEditor__REACT_HOT_LOADER__() {
-            return this.editor.getComponent(this.props.plugins, this.props.reducerKeys, this.getStore(), this.props.events, this.selectionModel, this.editor, this.props.columns);
-        }
-    }, {
-        key: '__getColumns__REACT_HOT_LOADER__',
-        value: function __getColumns__REACT_HOT_LOADER__() {
-            var _props5 = this.props,
-                columns = _props5.columns,
-                columnState = _props5.columnState;
-
-
-            if (columnState && columnState.get && columnState.get('columns')) {
-                return columnState.get('columns');
-            }
-
-            return columns;
-        }
-    }, {
-        key: '__isLoading__REACT_HOT_LOADER__',
-        value: function __isLoading__REACT_HOT_LOADER__() {
-            return this.props.loadingState && this.props.loadingState.isLoading ? this.props.loadingState.isLoading : false;
-        }
-    }, {
-        key: '__addStyles__REACT_HOT_LOADER__',
-        value: function __addStyles__REACT_HOT_LOADER__() {
-            var styleEl = document.createElement('style');
-            var head = document.head || document.getElementsByTagName('head')[0];
-
-            styleEl.type = 'text/css';
-
-            if (styleEl.styleSheet) {
-                styleEl.styleSheet.cssText = styles;
-            } else {
-                styleEl.appendChild(document.createTextNode(styles));
-            }
-
-            head.appendChild(styleEl);
-        }
-    }, {
-        key: '__getStore__REACT_HOT_LOADER__',
-        value: function __getStore__REACT_HOT_LOADER__() {
-            return this.context.store || this.props.store;
         }
     }]);
 
