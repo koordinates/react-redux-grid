@@ -10,7 +10,7 @@ export const Text = ({
 }) => {
 
     const { CLASS_NAMES } = gridConfig();
-    const innerHTML = col.name;
+    const innerHTML = col.customHeaderCell ? col.customHeaderCell(col.name) : col.name;
     const draggable = col.moveable !== undefined
         ? col.moveable
         : columnManager.config.moveable;
@@ -29,7 +29,6 @@ export const Text = ({
             reactEvent.dataTransfer.setData('Text', JSON.stringify(data));
         }
     });
-
     return (
         <span { ...spanProps } >
             { innerHTML }

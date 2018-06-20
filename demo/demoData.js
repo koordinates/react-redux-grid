@@ -200,6 +200,13 @@ export const columns = [
         name: 'Name',
         dataIndex: 'Name',
         sortable: true,
+        customHeaderCell: (val) => {
+            return <div>🔥 {val}</div>
+        },
+
+        renderer: ({ value }) => {
+            return <span>'YO:' { value } </span>;
+        },
 
         width: '60%',
         className: 'additional-class',
