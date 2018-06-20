@@ -496,7 +496,7 @@ Grid.propTypes = {
     classNames: array,
     columnState: object,
     columns: arrayOf(object).isRequired,
-    data: oneOf([arrayOf(object), object]),
+    data: any,
     dataSource: any,
     dragAndDrop: bool,
     editorState: object,

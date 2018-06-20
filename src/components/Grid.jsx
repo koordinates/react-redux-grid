@@ -222,10 +222,7 @@ export class Grid extends Component {
         classNames: array,
         columnState: object,
         columns: arrayOf(object).isRequired,
-        data: oneOf([
-            object,
-            PropTypes.array
-        ]),
+        data: any,
         dataSource: any,
         dragAndDrop: bool,
         editorState: object,
