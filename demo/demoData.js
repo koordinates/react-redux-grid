@@ -129,14 +129,6 @@ export const plugins = {
     LOADER: {
         enabled: true
     },
-    SELECTION_MODEL: {
-        mode: 'checkbox-multi',
-        enabled: true,
-        allowDeselect: true,
-        activeCls: 'active',
-        selectionEvent: 'singleclick',
-        editEvent: 'none'
-    },
     ERROR_HANDLER: {
         defaultErrorMessage: 'AN ERROR OCURRED',
         enabled: true
@@ -201,11 +193,13 @@ export const columns = [
         dataIndex: 'Name',
         sortable: true,
         customHeaderCell: (val) => {
-            return <div>🔥 {val}</div>
+            return <div onClick={(e) => {
+                console.log('🔥🔥🔥🔥🔥', e)
+            }}>🔥 {val}</div>
         },
 
         renderer: ({ value }) => {
-            return <span>'YO:' { value } </span>;
+            return <span>{ value } </span>;
         },
 
         width: '60%',

@@ -132,7 +132,8 @@ var Grid = exports.Grid = function (_Component) {
                 pageSize = _props.pageSize,
                 plugins = _props.plugins,
                 reducerKeys = _props.reducerKeys,
-                stateKey = _props.stateKey;
+                stateKey = _props.stateKey,
+                customHeader = _props.customHeader;
 
 
             var headerHidden = columnState ? columnState.headerHidden : false;
@@ -155,7 +156,7 @@ var Grid = exports.Grid = function (_Component) {
                     stateKey: stateKey,
                     store: store
                 }),
-                _react2.default.createElement(_FixedHeader2.default, _extends({
+                customHeader ? customHeader() : _react2.default.createElement(_FixedHeader2.default, _extends({
                     headerHidden: headerHidden
                 }, this.getHeaderProps(true))),
                 _react2.default.createElement(_TableContainer2.default, {

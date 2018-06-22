@@ -48,7 +48,6 @@ const {
 export class Grid extends Component {
 
     render() {
-
         const { CLASS_NAMES, USE_GRID_STYLES } = gridConfig();
         const editorComponent = this.getEditor();
         const isLoading = this.isLoading();
@@ -70,7 +69,8 @@ export class Grid extends Component {
             pageSize,
             plugins,
             reducerKeys,
-            stateKey
+            stateKey,
+            customHeader,
         } = this.props;
 
         const headerHidden = columnState
@@ -102,10 +102,16 @@ export class Grid extends Component {
                     stateKey={stateKey}
                     store={store}
                 />
-                <FixedHeader
-                    headerHidden={headerHidden}
-                    { ...this.getHeaderProps(true) }
-                />
+                {
+                    customHeader
+                    ? customHeader()
+                    : (
+                        <FixedHeader
+                            headerHidden={headerHidden}
+                            { ...this.getHeaderProps(true) }
+                        />
+                    )
+                }
                 <TableContainer
                     editorComponent={editorComponent}
                     headerProps={this.getHeaderProps(false)}

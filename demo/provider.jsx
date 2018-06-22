@@ -30,7 +30,8 @@ const config = {
     pageSize,
     plugins,
     events,
-    stateKey
+    stateKey,
+    customHeader: () => <div>🕊 🐍 🕊 🐍 🕊 🐍 🕊 🐍</div>,
 };
 
 export default (
