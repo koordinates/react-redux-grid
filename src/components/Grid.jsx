@@ -48,6 +48,7 @@ const {
 export class Grid extends Component {
 
     render() {
+
         const { CLASS_NAMES, USE_GRID_STYLES } = gridConfig();
         const editorComponent = this.getEditor();
         const isLoading = this.isLoading();
@@ -104,7 +105,7 @@ export class Grid extends Component {
                 />
                 {
                     customHeader
-                    ? customHeader()
+                    ? null
                     : (
                         <FixedHeader
                             headerHidden={headerHidden}
@@ -112,12 +113,14 @@ export class Grid extends Component {
                         />
                     )
                 }
+
                 <TableContainer
                     editorComponent={editorComponent}
                     headerProps={this.getHeaderProps(false)}
                     height={height}
                     infinite={infinite}
                     rowProps={this.getRowProps()}
+                    customHeader={customHeader}
                 />
                 <PagerToolbar
                     dataSource={dataSource}

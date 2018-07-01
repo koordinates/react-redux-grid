@@ -156,7 +156,7 @@ var Grid = exports.Grid = function (_Component) {
                     stateKey: stateKey,
                     store: store
                 }),
-                customHeader ? customHeader() : _react2.default.createElement(_FixedHeader2.default, _extends({
+                customHeader ? null : _react2.default.createElement(_FixedHeader2.default, _extends({
                     headerHidden: headerHidden
                 }, this.getHeaderProps(true))),
                 _react2.default.createElement(_TableContainer2.default, {
@@ -164,7 +164,8 @@ var Grid = exports.Grid = function (_Component) {
                     headerProps: this.getHeaderProps(false),
                     height: height,
                     infinite: infinite,
-                    rowProps: this.getRowProps()
+                    rowProps: this.getRowProps(),
+                    customHeader: customHeader
                 }),
                 _react2.default.createElement(_Pager2.default, {
                     dataSource: dataSource,

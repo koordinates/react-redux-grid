@@ -64,7 +64,8 @@ var TableContainer = exports.TableContainer = function (_Component) {
                 headerProps = _props.headerProps,
                 height = _props.height,
                 rowProps = _props.rowProps,
-                infinite = _props.infinite;
+                infinite = _props.infinite,
+                customHeader = _props.customHeader;
             var _state = this.state,
                 containerScrollTop = _state.containerScrollTop,
                 containerHeight = _state.containerHeight;
@@ -82,7 +83,7 @@ var TableContainer = exports.TableContainer = function (_Component) {
                         cellSpacing: 0,
                         className: (0, _prefix.prefix)(CLASS_NAMES.TABLE, CLASS_NAMES.HEADER_HIDDEN)
                     },
-                    _react2.default.createElement(_Header2.default, headerProps),
+                    customHeader ? customHeader() : _react2.default.createElement(_Header2.default, headerProps),
                     _react2.default.createElement(_TableRow2.default, _extends({
                         containerHeight: containerHeight,
                         containerScrollTop: containerScrollTop,

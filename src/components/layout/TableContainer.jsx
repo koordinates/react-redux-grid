@@ -20,7 +20,8 @@ export class TableContainer extends Component {
             headerProps,
             height,
             rowProps,
-            infinite
+            infinite,
+            customHeader,
         } = this.props;
 
         const { containerScrollTop, containerHeight } = this.state;
@@ -38,7 +39,11 @@ export class TableContainer extends Component {
                         )
                     }
                 >
-                    <Header { ...headerProps } />
+                    {
+                        customHeader
+                        ? customHeader()
+                        : <Header { ...headerProps } />
+                    }
                     <Row
                         containerHeight={containerHeight}
                         containerScrollTop={containerScrollTop}
