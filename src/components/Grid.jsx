@@ -6,7 +6,7 @@ import deepEqual from 'deep-equal';
 import TableContainer from './layout/TableContainer';
 import FixedHeader from './layout/FixedHeader';
 import PagerToolbar from './plugins/pager/Pager';
-import { Message } from './plugins/errorhandler/Message';
+import Message from './plugins/errorhandler/Message';
 import BulkActionToolbar from './plugins/bulkactions/Toolbar';
 import LoadingBar from './plugins/loader/LoadingBar';
 import ColumnManager from './core/ColumnManager';
@@ -39,6 +39,7 @@ const {
     arrayOf,
     bool,
     object,
+    oneOf,
     oneOfType,
     number,
     string
@@ -90,7 +91,9 @@ export class Grid extends Component {
             >
                 <Message
                     reducerKeys={reducerKeys}
+                    stateKey={stateKey}
                     store={store}
+                    plugins={plugins}
                 />
                 <BulkActionToolbar
                     plugins={plugins}
@@ -219,7 +222,10 @@ export class Grid extends Component {
         classNames: array,
         columnState: object,
         columns: arrayOf(object).isRequired,
-        data: arrayOf(object),
+        data: oneOf([
+            arrayOf(object),
+            object,
+        ]),
         dataSource: any,
         dragAndDrop: bool,
         editorState: object,
