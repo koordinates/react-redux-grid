@@ -201,6 +201,9 @@ var FixedHeader = function (_Component) {
             var isSticky = (0, _isPluginEnabled.isPluginEnabled)(plugins, 'STICKY_HEADER');
 
             var headerDOM = _reactDom2.default.findDOMNode(this);
+            if (!headerDOM) {
+                return;
+            }
             var tableHeight = headerDOM.parentNode.clientHeight;
 
             this.HEADER_HEIGHT = headerDOM.clientHeight;
@@ -340,6 +343,9 @@ var FixedHeader = function (_Component) {
                 CLASS_NAMES = _gridConfig2.CLASS_NAMES;
 
             var header = _reactDom2.default.findDOMNode(this);
+            if (!header) {
+                return;
+            }
             var headerOffset = this.state.headerOffset;
 
 

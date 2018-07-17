@@ -95,6 +95,9 @@ var PagerToolbar = exports.PagerToolbar = function (_Component) {
             var isSticky = plugins.STICKY_FOOTER ? plugins.STICKY_FOOTER.enabled : false;
 
             var footerDOM = _reactDom2.default.findDOMNode(this);
+            if (!footerDOM) {
+                return;
+            }
 
             this.FOOTER_HEIGHT = footerDOM.clientHeight;
 

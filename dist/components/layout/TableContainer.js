@@ -122,8 +122,9 @@ var TableContainer = exports.TableContainer = function (_Component) {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
             var container = _reactDom2.default.findDOMNode(this);
-
-            container.removeEventListener('scroll', this._scrollListener);
+            if (container) {
+                container.removeEventListener('scroll', this._scrollListener);
+            }
             window.removeEventListener('resize', this._resizeListener);
         }
     }]);

@@ -87,8 +87,9 @@ export class TableContainer extends Component {
 
     componentWillUnmount() {
         const container = ReactDOM.findDOMNode(this);
-
-        container.removeEventListener('scroll', this._scrollListener);
+        if (container) {
+            container.removeEventListener('scroll', this._scrollListener);
+        }
         window.removeEventListener('resize', this._resizeListener);
     }
 

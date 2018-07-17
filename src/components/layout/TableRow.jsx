@@ -119,9 +119,10 @@ export class TableRow extends Component {
         const tbody = ReactDOM
             .findDOMNode(this);
 
+
         const rows = tbody
             ? Array.from(tbody.querySelectorAll(`.${prefix(CLASS_NAMES.ROW)}`))
-            : null;
+            : [];
 
         if (!rows.length) {
             return;

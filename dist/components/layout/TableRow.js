@@ -291,7 +291,7 @@ var TableRow = exports.TableRow = function (_Component) {
 
             var tbody = _reactDom2.default.findDOMNode(this);
 
-            var rows = tbody ? (0, _arrayFrom2.default)(tbody.querySelectorAll('.' + (0, _prefix.prefix)(CLASS_NAMES.ROW))) : null;
+            var rows = tbody ? (0, _arrayFrom2.default)(tbody.querySelectorAll('.' + (0, _prefix.prefix)(CLASS_NAMES.ROW))) : [];
 
             if (!rows.length) {
                 return;

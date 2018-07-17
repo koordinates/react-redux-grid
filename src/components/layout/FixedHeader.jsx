@@ -169,6 +169,9 @@ class FixedHeader extends Component {
         const isSticky = isPluginEnabled(plugins, 'STICKY_HEADER');
 
         const headerDOM = ReactDOM.findDOMNode(this);
+        if (!headerDOM) {
+            return
+        }
         const tableHeight = headerDOM.parentNode.clientHeight;
 
         this.HEADER_HEIGHT = headerDOM.clientHeight;
@@ -315,6 +318,7 @@ class FixedHeader extends Component {
     getScrollWidth() {
         const { CLASS_NAMES } = gridConfig();
         const header = ReactDOM.findDOMNode(this);
+        if (!header) {return;}
         const { headerOffset } = this.state;
 
         const fixed = header

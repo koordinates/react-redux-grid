@@ -75,6 +75,7 @@ export class PagerToolbar extends Component {
             : false;
 
         const footerDOM = ReactDOM.findDOMNode(this);
+        if (!footerDOM) { return; }
 
         this.FOOTER_HEIGHT = footerDOM.clientHeight;
 
