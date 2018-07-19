@@ -170,7 +170,9 @@ var FixedHeader = function (_Component) {
 
             return _react2.default.createElement(
                 'div',
-                { className: containerClassName },
+                { className: containerClassName, ref: function ref(container) {
+                        return _this2.container = container;
+                    } },
                 fillerCmp,
                 _react2.default.createElement(
                     'table',

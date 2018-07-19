@@ -144,7 +144,7 @@ class FixedHeader extends Component {
         );
 
         return (
-            <div className={containerClassName}>
+            <div className={containerClassName} ref={(container) => this.container = container}>
                 { fillerCmp }
                 <table
                     cellSpacing={0}
