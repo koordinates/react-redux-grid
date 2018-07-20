@@ -30,9 +30,7 @@
     "test": "karma start ./test/karma.config.js -- --coverage",
     "test:no-coverage": "karma start ./test/karma.config.js -- --no-coverage",
     "test:browser": "karma start ./test/karma.config.js -- --browser",
-    "test:watch": "karma start ./test/karma.config.js -- --no-single-run --no-suppress-error-summary",
-    "precommit": "npm run lint",
-    "prepush": "npm run test"
+    "test:watch": "karma start ./test/karma.config.js -- --no-single-run --no-suppress-error-summary"
   },
   "dependencies": {
     "array-from": "^2.1.1",

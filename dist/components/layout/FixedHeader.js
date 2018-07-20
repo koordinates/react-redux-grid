@@ -341,13 +341,15 @@ var FixedHeader = function (_Component) {
     }, {
         key: 'getScrollWidth',
         value: function getScrollWidth() {
+            console.log("🍊", this.container);
+            if (!this.container) {
+                return;
+            }
+
             var _gridConfig2 = (0, _GridConstants.gridConfig)(),
                 CLASS_NAMES = _gridConfig2.CLASS_NAMES;
 
-            var header = _reactDom2.default.findDOMNode(this);
-            if (!header) {
-                return;
-            }
+            var header = this.container;
             var headerOffset = this.state.headerOffset;
 
 

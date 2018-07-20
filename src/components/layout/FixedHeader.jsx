@@ -316,9 +316,9 @@ class FixedHeader extends Component {
     }
 
     getScrollWidth() {
+        if (!this.container) {return;}
         const { CLASS_NAMES } = gridConfig();
-        const header = ReactDOM.findDOMNode(this);
-        if (!header) {return;}
+        const header = this.container;
         const { headerOffset } = this.state;
 
         const fixed = header
