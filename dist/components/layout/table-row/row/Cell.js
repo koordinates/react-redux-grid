@@ -56,7 +56,8 @@ var Cell = exports.Cell = function Cell(_ref) {
         stateful = _ref.stateful,
         stateKey = _ref.stateKey,
         store = _ref.store,
-        treeData = _ref.treeData;
+        treeData = _ref.treeData,
+        isFirst = _ref.isFirst;
 
     var _gridConfig = (0, _GridConstants.gridConfig)(),
         CLASS_NAMES = _gridConfig.CLASS_NAMES;
@@ -95,9 +96,11 @@ var Cell = exports.Cell = function Cell(_ref) {
         },
         style: {}
     };
-
     if (hidden) {
         cellProps.style.display = 'none';
+    }
+    if (isFirst) {
+        cellProps.className = cellProps.className + ' kx-is-first-column';
     }
 
     var arrowProps = {

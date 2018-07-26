@@ -50,6 +50,7 @@ export class Row extends Component {
         const id = row.get('_key');
 
         const visibleColumns = columns.filter((col) => !col.hidden);
+        const firstVisibleColumn = visibleColumns.length ? visibleColumns[0] : null;
         const cellValues = getCellValues(columns, row);
 
         if (Object.keys(row).length !== columns.length) {
@@ -94,6 +95,7 @@ export class Row extends Component {
                     stateful={stateful}
                     store={store}
                     treeData={cellTreeData}
+                    isFirst={k === firstVisibleColumn.dataIndex}
                 />);
 
         });

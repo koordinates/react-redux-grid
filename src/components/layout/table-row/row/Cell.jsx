@@ -31,7 +31,8 @@ export const Cell = ({
     stateful,
     stateKey,
     store,
-    treeData
+    treeData,
+    isFirst,
 }) => {
 
     const { CLASS_NAMES } = gridConfig();
@@ -84,9 +85,11 @@ export const Cell = ({
         onDoubleClick: (e) => handleDoubleClick(cellClickArguments, e),
         style: {}
     };
-
     if (hidden) {
         cellProps.style.display = 'none';
+    }
+    if (isFirst) {
+        cellProps.className = `${cellProps.className} kx-is-first-column`
     }
 
     const arrowProps = {

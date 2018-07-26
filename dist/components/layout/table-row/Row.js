@@ -105,6 +105,7 @@ var Row = exports.Row = function (_Component) {
             var visibleColumns = columns.filter(function (col) {
                 return !col.hidden;
             });
+            var firstVisibleColumn = visibleColumns.length ? visibleColumns[0] : null;
             var cellValues = getCellValues(columns, row);
 
             if (Object.keys(row).length !== columns.length) {
@@ -142,7 +143,8 @@ var Row = exports.Row = function (_Component) {
                     stateKey: stateKey,
                     stateful: stateful,
                     store: store,
-                    treeData: cellTreeData
+                    treeData: cellTreeData,
+                    isFirst: k === firstVisibleColumn.dataIndex
                 });
             });
 
