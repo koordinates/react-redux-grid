@@ -1,23 +1,22 @@
 {
-  "name": "react-redux-grid",
+  "name": "@koordinates/react-redux-grid",
   "version": "5.5.4",
   "description": "A React Grid Component written in the Redux Pattern",
   "author": "Bejamin Cripps",
   "contributors": [
-    {
-      "name": "Bejamin Cripps",
-      "url": "http://benjamincripps.com"
-    },
-    {
-      "name": "Travis Johnson",
-      "email": "tvjohnson@gmail.com"
-    }
+    "Bejamin Cripps (http://benjamincripps.com)",
+    "Travis Johnson <tvjohnson@gmail.com>"
   ],
   "license": "MIT",
-  "bugs": "https://github.com/bencripps/react-redux-grid/issues",
+  "bugs": {
+    "url": "https://github.com/bencripps/react-redux-grid/issues"
+  },
   "homepage": "http://react-redux-grid.herokuapp.com/",
   "main": "dist/index.js",
-  "repository": "bencripps/react-redux-grid",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bencripps/react-redux-grid.git"
+  },
   "scripts": {
     "demo": "http-server -p 3000 ./demo",
     "dist": "babel ./src --out-dir dist",
@@ -116,5 +115,9 @@
     "url-loader": "^0.5.7",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.3.0"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
   }
 }
