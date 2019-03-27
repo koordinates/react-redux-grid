@@ -17,6 +17,10 @@ export const handleActions = (map, initialState) => {
             throw new Error(TYPE_ERROR);
         }
 
+        if (action.type === 'RESET_GRID') {
+            return initialState;
+        }
+
         const reducerSubFunction = map[action.type];
 
         if (typeof reducerSubFunction === 'function') {

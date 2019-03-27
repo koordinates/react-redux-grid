@@ -25,6 +25,10 @@ var handleActions = exports.handleActions = function handleActions(map, initialS
             throw new Error(TYPE_ERROR);
         }
 
+        if (action.type === 'RESET_GRID') {
+            return initialState;
+        }
+
         var reducerSubFunction = map[action.type];
 
         if (typeof reducerSubFunction === 'function') {
