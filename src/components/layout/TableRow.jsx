@@ -53,7 +53,7 @@ export class TableRow extends Component {
         this.calculateHeights();
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         const { rowHeight } = this.state;
 
         if (this.props.containerScrollTop !== nextProps.containerScrollTop) {

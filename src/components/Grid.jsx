@@ -140,7 +140,7 @@ export class Grid extends Component {
         );
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
 
         const {
             dataSource,
@@ -183,7 +183,7 @@ export class Grid extends Component {
         this.editor.init(plugins, stateKey, store, events);
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         // for issue #30 -- if we're relying on a dataArray
         // as the dataSource, we need to trigger rerender
         // if the dataArray has changed
