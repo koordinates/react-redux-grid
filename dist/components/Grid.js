@@ -184,8 +184,8 @@ var Grid = exports.Grid = function (_Component) {
             );
         }
     }, {
-        key: 'componentWillMount',
-        value: function componentWillMount() {
+        key: 'UNSAFE_componentWillMount',
+        value: function UNSAFE_componentWillMount() {
             var _props2 = this.props,
                 dataSource = _props2.dataSource,
                 gridType = _props2.gridType,
@@ -225,8 +225,8 @@ var Grid = exports.Grid = function (_Component) {
             this.editor.init(plugins, stateKey, store, events);
         }
     }, {
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
+        key: 'UNSAFE_componentWillReceiveProps',
+        value: function UNSAFE_componentWillReceiveProps(nextProps) {
             // for issue #30 -- if we're relying on a dataArray
             // as the dataSource, we need to trigger rerender
             // if the dataArray has changed

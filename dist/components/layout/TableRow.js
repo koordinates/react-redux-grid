@@ -101,8 +101,8 @@ var TableRow = exports.TableRow = function (_Component) {
             this.calculateHeights();
         }
     }, {
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
+        key: 'UNSAFE_componentWillReceiveProps',
+        value: function UNSAFE_componentWillReceiveProps(nextProps) {
             var rowHeight = this.state.rowHeight;
 
 
