@@ -77,8 +77,6 @@ var Row = exports.Row = function (_Component) {
             var _props = this.props,
                 columnManager = _props.columnManager,
                 columns = _props.columns,
-                connectDragSource = _props.connectDragSource,
-                connectDropTarget = _props.connectDropTarget,
                 dragAndDrop = _props.dragAndDrop,
                 editor = _props.editor,
                 editorState = _props.editorState,
@@ -205,9 +203,9 @@ var Row = exports.Row = function (_Component) {
                 );
             }
 
-            if (dragAndDrop) {
-                return connectDragSource(connectDropTarget(rowEl));
-            }
+            // if (dragAndDrop) {
+            //     return connectDragSource(connectDropTarget(rowEl));
+            // }
 
             return rowEl;
         }
@@ -243,8 +241,8 @@ var Row = exports.Row = function (_Component) {
 Row.propTypes = {
     columnManager: object.isRequired,
     columns: arrayOf(object).isRequired,
-    connectDragSource: func,
-    connectDropTarget: func,
+    // connectDragSource: func,
+    // connectDropTarget: func,
     data: arrayOf(object),
     dataSource: object,
     dragAndDrop: bool,
@@ -274,12 +272,8 @@ Row.propTypes = {
     treeData: object
 };
 Row.defaultProps = {
-    connectDragSource: function connectDragSource(i) {
-        return i;
-    },
-    connectDropTarget: function connectDropTarget(i) {
-        return i;
-    },
+    // connectDragSource: i => i,
+    // connectDropTarget: i => i,
     emptyDataMessage: 'No Data Available',
     treeData: {}
 };
@@ -618,17 +612,7 @@ var rowTarget = {
     }
 };
 
-var _default = (0, _RowContainer2.default)((0, _reactDnd.DropTarget)('ROW', rowTarget, function (connect) {
-    return {
-        connectDropTarget: connect.dropTarget()
-    };
-})((0, _reactDnd.DragSource)('ROW', rowSource, function (connect, monitor) {
-    return {
-        connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging()
-    };
-})(Row)));
-
+var _default = Row;
 exports.default = _default;
 ;
 

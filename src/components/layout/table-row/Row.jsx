@@ -24,8 +24,8 @@ export class Row extends Component {
         const {
             columnManager,
             columns,
-            connectDragSource,
-            connectDropTarget,
+            // connectDragSource,
+            // connectDropTarget,
             dragAndDrop,
             editor,
             editorState,
@@ -175,9 +175,9 @@ export class Row extends Component {
             );
         }
 
-        if (dragAndDrop) {
-            return connectDragSource(connectDropTarget(rowEl));
-        }
+        // if (dragAndDrop) {
+        //     return connectDragSource(connectDropTarget(rowEl));
+        // }
 
         return rowEl;
     }
@@ -189,8 +189,8 @@ export class Row extends Component {
     static propTypes = {
         columnManager: object.isRequired,
         columns: arrayOf(object).isRequired,
-        connectDragSource: func,
-        connectDropTarget: func,
+        // connectDragSource: func,
+        // connectDropTarget: func,
         data: arrayOf(object),
         dataSource: object,
         dragAndDrop: bool,
@@ -223,8 +223,8 @@ export class Row extends Component {
     };
 
     static defaultProps = {
-        connectDragSource: i => i,
-        connectDropTarget: i => i,
+        // connectDragSource: i => i,
+        // connectDropTarget: i => i,
         emptyDataMessage: 'No Data Available',
         treeData: {}
     };
@@ -651,11 +651,4 @@ const rowTarget = {
 
 };
 
-export default RowContainer(DropTarget('ROW', rowTarget, connect => ({
-    connectDropTarget: connect.dropTarget()
-}))(
-    DragSource('ROW', rowSource, (connect, monitor) => ({
-        connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging()
-    }))(Row)
-));
+export default Row;
