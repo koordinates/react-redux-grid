@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { List } from 'immutable';
 import ReactDOM from 'react-dom';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
 
 import { isPluginEnabled } from '../../util/isPluginEnabled';
 import * as buffer from '../../util/buffer';
@@ -284,4 +282,4 @@ export const getTreeData = row => ({
     path: row.get('_path')
 });
 
-export default DragDropContext(HTML5Backend)(TableRow);
+export default TableRow;

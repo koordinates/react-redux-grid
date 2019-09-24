@@ -25,12 +25,6 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactDnd = require('react-dnd');
-
-var _reactDndHtml5Backend = require('react-dnd-html5-backend');
-
-var _reactDndHtml5Backend2 = _interopRequireDefault(_reactDndHtml5Backend);
-
 var _isPluginEnabled = require('../../util/isPluginEnabled');
 
 var _buffer = require('../../util/buffer');
@@ -374,8 +368,7 @@ var getTreeData = exports.getTreeData = function getTreeData(row) {
     };
 };
 
-var _default2 = (0, _reactDnd.DragDropContext)(_reactDndHtml5Backend2.default)(TableRow);
-
+var _default2 = TableRow;
 exports.default = _default2;
 ;
 
