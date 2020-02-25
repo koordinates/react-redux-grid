@@ -59,7 +59,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 /* eslint-disable react/no-set-state */
 
 
-var arrayOf = _propTypes2.default.arrayOf,
+var any = _propTypes2.default.any,
+    arrayOf = _propTypes2.default.arrayOf,
     bool = _propTypes2.default.bool,
     func = _propTypes2.default.func,
     number = _propTypes2.default.number,
@@ -326,7 +327,7 @@ TableRow.propTypes = {
     dragAndDrop: bool,
     editor: object,
     editorState: object,
-    emptyDataMessage: string,
+    emptyDataMessage: any,
     events: object,
     gridType: _GridConstants.GRID_TYPES,
     infinite: bool,
@@ -376,6 +377,8 @@ var _temp = function () {
     if (typeof __REACT_HOT_LOADER__ === 'undefined') {
         return;
     }
+
+    __REACT_HOT_LOADER__.register(any, 'any', 'src/components/layout/TableRow.jsx');
 
     __REACT_HOT_LOADER__.register(arrayOf, 'arrayOf', 'src/components/layout/TableRow.jsx');
 

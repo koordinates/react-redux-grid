@@ -22,7 +22,7 @@ import {
 import Row from './table-row/Row';
 import { PlaceHolder } from './row/PlaceHolder';
 
-const { arrayOf, bool, func, number, object, string, oneOfType } = PropTypes;
+const { any, arrayOf, bool, func, number, object, string, oneOfType } = PropTypes;
 
 export class TableRow extends Component {
 
@@ -87,7 +87,7 @@ export class TableRow extends Component {
         dragAndDrop: bool,
         editor: object,
         editorState: object,
-        emptyDataMessage: string,
+        emptyDataMessage: any,
         events: object,
         gridType: GRID_TYPES,
         infinite: bool,

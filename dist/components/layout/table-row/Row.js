@@ -53,7 +53,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var arrayOf = _propTypes2.default.arrayOf,
+var any = _propTypes2.default.any,
+    arrayOf = _propTypes2.default.arrayOf,
     bool = _propTypes2.default.bool,
     func = _propTypes2.default.func,
     object = _propTypes2.default.object,
@@ -248,7 +249,7 @@ Row.propTypes = {
     dragAndDrop: bool,
     editor: object,
     editorState: object,
-    emptyDataMessage: string,
+    emptyDataMessage: any,
     events: object,
     findRow: func.isRequired,
     gridType: oneOf(['tree', 'grid']),
@@ -620,6 +621,8 @@ var _temp = function () {
     if (typeof __REACT_HOT_LOADER__ === 'undefined') {
         return;
     }
+
+    __REACT_HOT_LOADER__.register(any, 'any', 'src/components/layout/table-row/Row.jsx');
 
     __REACT_HOT_LOADER__.register(arrayOf, 'arrayOf', 'src/components/layout/table-row/Row.jsx');
 
